@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajpoot RFC Food Cottage | Official Website</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-main: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --bg-nav: rgba(255, 255, 255, 0.85);
+            --text-title: #0F172A;
+            --text-body: #334155;
+            --text-muted: #64748B;
+            --primary: #E4002B;
+            --primary-hover: #CC0026;
+            --primary-glow: rgba(228, 0, 43, 0.15);
+            --secondary: #FFB800;
+            --border: #E2E8F0;
+            --shadow-subtle: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+            --shadow-3d: 0 20px 30px -10px rgba(15, 23, 42, 0.08), 0 8px 12px -4px rgba(15, 23, 42, 0.04);
+            --shadow-3d-hover: 0 30px 45px -12px rgba(228, 0, 43, 0.18), 0 12px 20px -6px rgba(15, 23, 42, 0.08);
+            --font-head: 'Montserrat', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --bg-main: #090D14;
+            --bg-card: #131A26;
+            --bg-nav: rgba(19, 26, 38, 0.85);
+            --text-title: #F8FAFC;
+            --text-body: #94A3B8;
+            --text-muted: #64748B;
+            --border: #1E293B;
+            --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
+            --shadow-3d: 0 20px 30px -10px rgba(0, 0, 0, 0.5), 0 8px 12px -4px rgba(0, 0, 0, 0.3);
+            --shadow-3d-hover: 0 30px 45px -12px rgba(228, 0, 43, 0.25), 0 12px 20px -6px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-body);
+            font-family: var(--font-body);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* SCROLL ANIMATION UTILITIES */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-active {
+            opacity: 1 !important;
+            transform: translate(0, 0) !important;
+        }
+
+        /* HEADER & NAVIGATION */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--bg-nav);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-family: var(--font-head);
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--text-title);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.03);
+        }
+
+        .logo span { color: var(--primary); }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-body);
+            text-decoration: none;
+            font-family: var(--font-head);
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.2s ease;
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-title);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-subtle);
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            border-color: var(--text-muted);
+        }
+
+        .cart-btn {
+            background: var(--primary);
+            color: #FFF;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-family: var(--font-head);
+            font-size: 0.85rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px var(--primary-glow);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cart-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(228, 0, 43, 0.3);
+        }
+
+        .cart-count {
+            background: #FFF;
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 900;
+        }
+
+        /* SECTION LAYOUTS */
+        section {
+            padding: 90px 8%;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 55px;
+        }
+
+        .section-tag {
+            font-family: var(--font-head);
+            font-size: 0.78rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: inline-block;
+            background: var(--primary-glow);
+            padding: 6px 14px;
+            border-radius: 30px;
+        }
+
+        .section-title {
+            font-family: var(--font-head);
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--text-title);
+            letter-spacing: -0.5px;
+        }
+
+        /* HERO SECTION */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            gap: 60px;
+            min-height: 75vh;
+        }
+
+        .hero-title {
+            font-family: var(--font-head);
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.12;
+            color: var(--text-title);
+            margin-bottom: 22px;
+            letter-spacing: -1px;
+        }
+
+        .hero-title span { color: var(--primary); }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-body);
+            margin-bottom: 35px;
+            max-width: 90%;
+        }
+
+        .hero-img-container {
+            position: relative;
+        }
+
+        .hero-img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-3d);
+            border: 1px solid var(--border);
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+        }
+
+        .hero-img-container:hover .hero-img {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-3d-hover);
+        }
+
+        /* BUTTONS */
+        .btn-primary {
+            background: var(--primary);
+            color: #FFF;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-family: var(--font-head);
+            font-size: 0.88rem;
+            font-weight: 800;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px var(--primary-glow);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(228, 0, 43, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-title);
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-family: var(--font-head);
+            font-size: 0.88rem;
+            font-weight: 800;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow-subtle);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            border-color: var(--text-muted);
+            box-shadow: var(--shadow-3d);
+        }
+
+        /* STATS BANNER */
+        .stats-banner {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow-3d);
+        }
+
+        .stat-card { 
+            text-align: center;
+            padding: 15px;
+            border-radius: 14px;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .stat-number {
+            font-family: var(--font-head);
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* PIZZA SIZES CARDS WITH IMAGES */
+        .size-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        .size-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .size-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-3d-hover);
+            border-color: rgba(228, 0, 43, 0.4);
+        }
+
+        .size-img-wrapper {
+            height: 180px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            background: #F1F5F9;
+        }
+
+        .size-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .size-card:hover .size-img-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .size-badge {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(8px);
+            color: #FFF;
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 0.78rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .size-content {
+            padding: 22px;
+            text-align: center;
+        }
+
+        .size-content h3 {
+            font-family: var(--font-head);
+            color: var(--text-title);
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .size-content p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* MENU CATEGORY TABS & CARDS */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .tab-btn {
+            padding: 10px 22px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            color: var(--text-body);
+            font-family: var(--font-head);
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background: var(--primary);
+            color: #FFF;
+            border-color: var(--primary);
+            box-shadow: 0 8px 18px var(--primary-glow);
+            transform: translateY(-2px);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .food-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .food-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-3d-hover);
+            border-color: rgba(228, 0, 43, 0.3);
+        }
+
+        .card-img-wrapper {
+            height: 190px;
+            width: 100%;
+            position: relative;
+            background: #F1F5F9;
+            overflow: hidden;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .food-card:hover .card-img-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .price-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--bg-card);
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: 0.85rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .card-body { padding: 22px; }
+
+        .card-body h3 {
+            font-family: var(--font-head);
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-title);
+            margin-bottom: 8px;
+        }
+
+        .card-body p {
+            font-size: 0.85rem;
+            color: var(--text-body);
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .btn-card {
+            width: 100%;
+            padding: 12px;
+            background: rgba(228, 0, 43, 0.06);
+            color: var(--primary);
+            border: 1px solid rgba(228, 0, 43, 0.15);
+            border-radius: 12px;
+            font-family: var(--font-head);
+            font-size: 0.82rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+        }
+
+        .btn-card:hover {
+            background: var(--primary);
+            color: #FFF;
+            border-color: var(--primary);
+            box-shadow: 0 6px 15px var(--primary-glow);
+        }
+
+        /* CART DRAWER */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 400px;
+            height: 100vh;
+            background: var(--bg-card);
+            border-left: 1px solid var(--border);
+            z-index: 2000;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: -15px 0 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .cart-drawer.active { right: 0; }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 18px;
+        }
+
+        .cart-items-list {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .cart-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* FAQ SECTION */
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-subtle);
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-2px);
+            border-color: var(--text-muted);
+        }
+
+        .faq-question {
+            font-family: var(--font-head);
+            font-weight: 800;
+            color: var(--text-title);
+            margin-bottom: 8px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--bg-card);
+            padding: 60px 8% 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 35px;
+            margin-bottom: 40px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 25px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 992px) {
+            .hero-grid, .stats-banner, .footer-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .cart-drawer { width: 100%; right: -100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <a href="#hero" class="logo">RAJPOOT <span>RFC</span></a>
+
+        <ul class="nav-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#sizes">Pizza Sizes</a></li>
+            <li><a href="#menu">Full Menu</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Location</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <button class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+
+            <button class="cart-btn" onclick="toggleCart()">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <span>Order Basket</span>
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Cart Drawer -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3 style="font-family: var(--font-head); color: var(--text-title);">Your Order Basket</h3>
+            <i class="fa-solid fa-xmark" style="cursor: pointer; font-size: 1.3rem; color: var(--text-title);" onclick="toggleCart()"></i>
+        </div>
+        <div class="cart-items-list" id="cartItemsList">
+            <p style="text-align: center; margin-top: 40px; color: var(--text-muted);">Your basket is currently empty.</p>
+        </div>
+        <div style="padding-top: 18px; border-top: 1px solid var(--border);">
+            <div style="display: flex; justify-content: space-between; font-family: var(--font-head); font-size: 1.1rem; margin-bottom: 18px; color: var(--text-title);">
+                <span>Total Amount:</span>
+                <span id="cartTotal" style="color: var(--primary); font-weight: 800;">Rs. 0</span>
+            </div>
+            <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="checkoutOrder()">
+                <i class="fa-solid fa-phone"></i> Confirm Order (Call)
+            </button>
+        </div>
+    </div>
+
+    <!-- 1. HERO SECTION -->
+    <section id="hero">
+        <div class="hero-grid">
+            <div class="reveal-left">
+                <span class="section-tag"><i class="fa-solid fa-fire"></i> Raiwind Road Lahore's Favorite Fast Food</span>
+                <h1 class="hero-title">Authentic & Delicious <span>Crispy Fast Food</span></h1>
+                <p class="hero-desc">Welcome to Rajpoot Food Cottage (RFC). Experience fresh hot pizzas, double-coated crunchy Zinger burgers, authentic egg burgers, shawarmas, and family combo deals delivered straight to you.</p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="#menu" class="btn-primary"><i class="fa-solid fa-utensils"></i> View Menu & Deals</a>
+                    <a href="#contact" class="btn-secondary"><i class="fa-solid fa-map-pin"></i> Branch Location</a>
+                </div>
+            </div>
+
+            <div class="hero-img-container reveal-right">
+                <img src="https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?auto=format&fit=crop&w=800&q=80" class="hero-img" alt="Real Crunchy Zinger Burger">
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. STATS BANNER -->
+    <section style="padding: 40px 8%;">
+        <div class="stats-banner reveal">
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Fresh Halal Chicken</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">8+</div>
+                <div class="stat-label">Exclusive Family Deals</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">02:00 AM</div>
+                <div class="stat-label">Late Night Service</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4.8 ★</div>
+                <div class="stat-label">Customer Rating</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. PIZZA SIZES GUIDE SECTION WITH IMAGES -->
+    <section id="sizes">
+        <div class="section-header reveal">
+            <span class="section-tag">Size & Price Guide</span>
+            <h2 class="section-title">Choose From All Pizza Sizes</h2>
+        </div>
+        <div class="size-grid">
+            <div class="size-card reveal">
+                <div class="size-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80" alt="Small Pizza">
+                    <div class="size-badge">4 Slices • 7 Inches</div>
+                </div>
+                <div class="size-content">
+                    <h3>Small Pizza</h3>
+                    <p>Perfect single serving choice for quick cravings.</p>
+                </div>
+            </div>
+
+            <div class="size-card reveal">
+                <div class="size-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80" alt="Medium Pizza">
+                    <div class="size-badge">6 Slices • 10 Inches</div>
+                </div>
+                <div class="size-content">
+                    <h3>Medium Pizza</h3>
+                    <p>Ideal serving size for 2 people sharing a meal.</p>
+                </div>
+            </div>
+
+            <div class="size-card reveal">
+                <div class="size-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80" alt="Large Pizza">
+                    <div class="size-badge">8 Slices • 12 Inches</div>
+                </div>
+                <div class="size-content">
+                    <h3>Large Pizza</h3>
+                    <p>Great choice for a small family or 3 to 4 friends.</p>
+                </div>
+            </div>
+
+            <div class="size-card reveal">
+                <div class="size-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&w=600&q=80" alt="Extra Large Pizza">
+                    <div class="size-badge">12 Slices • 14 Inches</div>
+                </div>
+                <div class="size-content">
+                    <h3>Extra Large</h3>
+                    <p>Special extra large size crafted for party groups.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. COMPLETE MENU & DEALS SECTION -->
+    <section id="menu">
+        <div class="section-header reveal">
+            <span class="section-tag">Complete Food Catalog</span>
+            <h2 class="section-title">Explore Our Full Menu</h2>
+        </div>
+
+        <div class="category-tabs reveal">
+            <button class="tab-btn active" onclick="filterCategory('all', this)">All Items</button>
+            <button class="tab-btn" onclick="filterCategory('deals', this)">Special Deals (1-8)</button>
+            <button class="tab-btn" onclick="filterCategory('pizza', this)">Pizza Flavors & Sizes</button>
+            <button class="tab-btn" onclick="filterCategory('burgers', this)">Burgers (Egg & Zinger)</button>
+            <button class="tab-btn" onclick="filterCategory('shawarma', this)">Shawarma & Paratha Roll</button>
+            <button class="tab-btn" onclick="filterCategory('sides', this)">Sides & Wings</button>
+        </div>
+
+        <div class="menu-grid" id="menuGrid">
+            <!-- JavaScript injected items -->
+        </div>
+    </section>
+
+    <!-- 5. ABOUT US SECTION -->
+    <section id="about">
+        <div class="hero-grid">
+            <div class="reveal-left">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80" class="hero-img" style="width: 100%; max-width: 100%;" alt="About Rajpoot RFC">
+            </div>
+            <div class="reveal-right">
+                <span class="section-tag">About Us</span>
+                <h2 style="font-family: var(--font-head); font-size: 2rem; color: var(--text-title); margin-bottom: 16px;">Rajpoot Food Cottage Raiwind Road</h2>
+                <p style="line-height: 1.8; color: var(--text-body);">Rajpoot Food Cottage (RFC) is a premier fast-food destination located on Raiwind Road, Lahore. We pride ourselves on serving fresh chicken, 100% real cheddar and mozzarella cheese, and rich signature spices. From double egg burgers to cheese-loaded stuffed crust pizzas, quality is our top priority.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. CUSTOMER REVIEWS SECTION -->
+    <section id="reviews">
+        <div class="section-header reveal">
+            <span class="section-tag">Customer Feedback</span>
+            <h2 class="section-title">What Our Customers Say</h2>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            <div class="reveal" style="background: var(--bg-card); padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow-subtle);">
+                <div style="color: var(--secondary); margin-bottom: 12px; font-size: 0.9rem;">★★★★★</div>
+                <p style="font-size: 0.9rem; line-height: 1.6;">"The Double Egg Shami Burger taste was awesome, and the egg layer was genuinely present on both sides."</p>
+                <h4 style="margin-top: 16px; font-family: var(--font-head); color: var(--text-title); font-size: 0.95rem;">— Hammad Ali</h4>
+            </div>
+            <div class="reveal" style="background: var(--bg-card); padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow-subtle);">
+                <div style="color: var(--secondary); margin-bottom: 12px; font-size: 0.9rem;">★★★★★</div>
+                <p style="font-size: 0.9rem; line-height: 1.6;">"Deal No. 8 is awesome for family! Pizza size and Zinger burgers were extremely crispy."</p>
+                <h4 style="margin-top: 16px; font-family: var(--font-head); color: var(--text-title); font-size: 0.95rem;">— Usman Tariq</h4>
+            </div>
+            <div class="reveal" style="background: var(--bg-card); padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow-subtle);">
+                <div style="color: var(--secondary); margin-bottom: 12px; font-size: 0.9rem;">★★★★★</div>
+                <p style="font-size: 0.9rem; line-height: 1.6;">"Staff behavior and delivery time are excellent. Best place for late night ordering."</p>
+                <h4 style="margin-top: 16px; font-family: var(--font-head); color: var(--text-title); font-size: 0.95rem;">— Bilal Ahmed</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FREQUENTLY ASKED QUESTIONS (FAQ) -->
+    <section id="faq">
+        <div class="section-header reveal">
+            <span class="section-tag">Common Questions</span>
+            <h2 class="section-title">Frequently Asked Questions</h2>
+        </div>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div class="faq-item reveal">
+                <div class="faq-question">Question: Is home delivery available?</div>
+                <p style="font-size: 0.9rem; color: var(--text-body);">Yes, fast home delivery is available across Raiwind Road Lahore and its nearby surrounding areas.</p>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-question">Question: What are your operational hours?</div>
+                <p style="font-size: 0.9rem; color: var(--text-body);">We are open daily from 12:00 PM in the afternoon until 2:00 AM at night.</p>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-question">Question: Is all chicken 100% Halal?</div>
+                <p style="font-size: 0.9rem; color: var(--text-body);">Yes, absolutely! All chicken and ingredients used are 100% certified Halal and fresh.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. CONTACT & LOCATION SECTION -->
+    <section id="contact">
+        <div class="section-header reveal">
+            <span class="section-tag">Location & Contact</span>
+            <h2 class="section-title">Visit Our Branch</h2>
+        </div>
+        <div class="reveal" style="background: var(--bg-card); padding: 40px; border-radius: 20px; border: 1px solid var(--border); text-align: center; max-width: 650px; margin: 0 auto; box-shadow: var(--shadow-3d);">
+            <i class="fa-solid fa-location-dot" style="font-size: 2.8rem; color: var(--primary); margin-bottom: 16px;"></i>
+            <h3 style="font-family: var(--font-head); font-size: 1.3rem; color: var(--text-title); margin-bottom: 8px;">Rajpoot RFC Food Cottage</h3>
+            <p style="margin-bottom: 20px; color: var(--text-body); font-size: 0.95rem;">Park, Kot Bagh, Raiwind Road Adda, Lahore, Pakistan</p>
+            <p style="font-weight: 800; font-family: var(--font-head); color: var(--text-title); margin-bottom: 24px; font-size: 1.05rem;">
+                Call or WhatsApp Order: 0301-4405887 | 0346-4646140
+            </p>
+            <a href="https://maps.app.goo.gl/Buz5jqrFFgdgjTiv5" target="_blank" class="btn-primary">
+                <i class="fa-solid fa-directions"></i> Open Location on Google Maps
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid reveal">
+            <div>
+                <a href="#" class="logo" style="margin-bottom: 12px;">RAJPOOT <span>RFC</span></a>
+                <p style="line-height: 1.6; color: var(--text-body); font-size: 0.88rem;">Rajpoot RFC Food Cottage - Raiwind Road Lahore's premier fast food spot.</p>
+            </div>
+            <div>
+                <h4 style="font-family: var(--font-head); color: var(--text-title); margin-bottom: 14px; font-size: 0.95rem;">Quick Links</h4>
+                <p style="margin-bottom: 8px;"><a href="#hero" style="color: var(--text-body); text-decoration: none; font-size: 0.88rem;">Home</a></p>
+                <p style="margin-bottom: 8px;"><a href="#menu" style="color: var(--text-body); text-decoration: none; font-size: 0.88rem;">Menu</a></p>
+                <p><a href="#about" style="color: var(--text-body); text-decoration: none; font-size: 0.88rem;">About Us</a></p>
+            </div>
+            <div>
+                <h4 style="font-family: var(--font-head); color: var(--text-title); margin-bottom: 14px; font-size: 0.95rem;">Contact Numbers</h4>
+                <p style="margin-bottom: 8px; font-size: 0.88rem;">0301-4405887</p>
+                <p style="font-size: 0.88rem;">0346-4646140</p>
+            </div>
+            <div>
+                <h4 style="font-family: var(--font-head); color: var(--text-title); margin-bottom: 14px; font-size: 0.95rem;">Opening Hours</h4>
+                <p style="font-size: 0.88rem;">12:00 PM - 02:00 AM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Rajpoot RFC Food Cottage Lahore. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Engine -->
+    <script>
+        const rfcFullCatalog = [
+            // SPECIAL DEALS (1 to 8)
+            { id: 1, name: 'Deal No. 1', category: 'deals', price: 580, img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80', desc: '1 Small Pizza + 1000ml Drink + Extra Mozzarella Cheese' },
+            { id: 2, name: 'Deal No. 2', category: 'deals', price: 1050, img: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80', desc: '1 Medium Pizza + 1000ml Drink + Extra Mozzarella Cheese' },
+            { id: 3, name: 'Deal No. 3', category: 'deals', price: 1250, img: 'https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&w=600&q=80', desc: '1 Large Pizza + 1500ml Cold Drink + Extra Cheese' },
+            { id: 4, name: 'Deal No. 4', category: 'deals', price: 1700, img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80', desc: '1 Extra Large Pizza + 1.5 Ltr Cold Drink + Extra Cheese' },
+            { id: 5, name: 'Deal No. 5', category: 'deals', price: 450, img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80', desc: '1 Crispy Zinger Burger + Regular Golden Fries + 345ml Drink' },
+            { id: 6, name: 'Deal No. 6', category: 'deals', price: 2200, img: 'https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=600&q=80', desc: '1 Large Pizza + 1 Medium Pizza + 1.5 Ltr Cold Drink' },
+            { id: 7, name: 'Deal No. 7', category: 'deals', price: 400, img: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=600&q=80', desc: '1 Patty Burger + 1 Regular Fries + 345ml Cold Drink' },
+            { id: 8, name: 'Deal No. 8', category: 'deals', price: 2050, img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80', desc: '1 Large Pizza + 2 Zinger Burgers + 2 Patty Burgers + 1.5 Ltr Drink' },
+
+            // PIZZAS
+            { id: 101, name: 'Chicken Tikka Pizza (Small)', category: 'pizza', price: 450, img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80', desc: '7-Inch Small Tikka Pizza with onions & melted mozzarella.' },
+            { id: 102, name: 'Chicken Tikka Pizza (Medium)', category: 'pizza', price: 850, img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80', desc: '10-Inch Medium Tikka Pizza with loaded chicken chunks.' },
+            { id: 103, name: 'Chicken Tikka Pizza (Large)', category: 'pizza', price: 1150, img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80', desc: '12-Inch Large Family Tikka Pizza with extra cheese.' },
+            { id: 104, name: 'Chicken Fajita Pizza (Small)', category: 'pizza', price: 450, img: 'https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80', desc: '7-Inch Small Fajita Pizza with capsicum & Mexican spices.' },
+            { id: 105, name: 'Chicken Fajita Pizza (Medium)', category: 'pizza', price: 850, img: 'https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80', desc: '10-Inch Medium Fajita Pizza loaded with chicken & veggies.' },
+            { id: 106, name: 'Chicken Fajita Pizza (Large)', category: 'pizza', price: 1150, img: 'https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80', desc: '12-Inch Large Fajita Pizza perfect for sharing.' },
+            { id: 107, name: 'Fajita Sensation Pizza (Medium)', category: 'pizza', price: 900, img: 'https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=600&q=80', desc: '10-Inch Spicy Fajita Sensation with jalapenos & mushrooms.' },
+            { id: 108, name: 'Chicken Supreme Pizza (Large)', category: 'pizza', price: 1250, img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80', desc: '12-Inch Large Supreme loaded with olives, mushrooms & double meat.' },
+            { id: 109, name: 'Cheese Lover Pizza (Medium)', category: 'pizza', price: 800, img: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80', desc: '10-Inch Double Layer Cheese Pizza without meat.' },
+            { id: 110, name: 'RFC Special Stuffed Crust (Large)', category: 'pizza', price: 1450, img: 'https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&w=600&q=80', desc: '12-Inch Cheese-filled ring crust pizza with premium toppings.' },
+
+            // BURGERS
+            { id: 201, name: 'Single Egg Burger (Anda Burger)', category: 'burgers', price: 180, img: 'https://images.unsplash.com/photo-1525164286253-04e68b9d94c6?auto=format&fit=crop&w=600&q=80', desc: 'Toasted bun with 1 fried sunny egg patty & fresh salad.' },
+            { id: 202, name: 'Double Egg Burger (Double Anda)', category: 'burgers', price: 230, img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80', desc: 'Real Double Egg burger layered with TWO fried eggs & special sauce.' },
+            { id: 203, name: 'Shami Anda Burger', category: 'burgers', price: 220, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80', desc: 'Traditional Shami kabab topped with a freshly fried egg.' },
+            { id: 204, name: 'Double Anda Shami Burger', category: 'burgers', price: 270, img: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80', desc: 'Spiced Shami kabab enclosed between TWO whole fried eggs.' },
+            { id: 205, name: 'Chicken Patty Burger', category: 'burgers', price: 250, img: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=600&q=80', desc: 'Crispy fried chicken patty with mayo and crisp lettuce.' },
+            { id: 206, name: 'Chicken Patty Cheese Burger', category: 'burgers', price: 300, img: 'https://images.unsplash.com/photo-1534790566855-4cc788479725?auto=format&fit=crop&w=600&q=80', desc: 'Chicken patty topped with a warm melted cheddar cheese slice.' },
+            { id: 207, name: 'RFC Crunchy Zinger Burger', category: 'burgers', price: 380, img: 'https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?auto=format&fit=crop&w=600&q=80', desc: 'Signature double coated crispy chicken thigh fillet with garlic mayo.' },
+            { id: 208, name: 'Zinger Cheese Burger', category: 'burgers', price: 430, img: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80', desc: 'Crispy Zinger fillet topped with a yellow cheddar cheese slice.' },
+            { id: 209, name: 'Double Decker Zinger Burger', category: 'burgers', price: 620, img: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80', desc: 'Two massive crispy Zinger fillets layered with double cheese.' },
+
+            // SHAWARMA
+            { id: 301, name: 'Chicken Shawarma', category: 'shawarma', price: 180, img: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80', desc: 'Shredded roasted chicken wrapped in pita bread with garlic mayo.' },
+            { id: 302, name: 'Chicken Cheese Shawarma', category: 'shawarma', price: 230, img: 'https://images.unsplash.com/photo-1561651823-34feb02250e4?auto=format&fit=crop&w=600&q=80', desc: 'Roasted chicken shawarma filled with shredded mozzarella cheese.' },
+            { id: 303, name: 'Zinger Paratha Roll', category: 'shawarma', price: 320, img: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80', desc: 'Crispy Zinger chicken strips wrapped in a crisp fried laccha paratha.' },
+            { id: 304, name: 'Zinger Cheese Paratha Roll', category: 'shawarma', price: 370, img: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80', desc: 'Zinger paratha roll filled with melted mozzarella cheese strings.' },
+
+            // SIDES
+            { id: 401, name: 'Crispy Hot Wings (10 Pcs)', category: 'sides', price: 580, img: 'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=600&q=80', desc: '10 pieces of hot & spicy double coated fried chicken wings.' },
+            { id: 402, name: 'Regular Potato Fries', category: 'sides', price: 180, img: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=80', desc: 'Salted golden potato french fries.' },
+            { id: 403, name: 'Mayo Garlic Fries', category: 'sides', price: 280, img: 'https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?auto=format&fit=crop&w=600&q=80', desc: 'Crispy fries drizzled with creamy garlic mayonnaise.' }
+        ];
+
+        let cart = [];
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('themeIcon');
+            if(html.getAttribute('data-theme') === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fa-solid fa-sun';
+            } else {
+                html.setAttribute('data-theme', 'light');
+                themeIcon.className = 'fa-solid fa-moon';
+            }
+        }
+
+        function renderMenu(items) {
+            const grid = document.getElementById('menuGrid');
+            grid.innerHTML = items.map(item => `
+                <div class="food-card reveal">
+                    <div class="card-img-wrapper">
+                        <img src="${item.img}" alt="${item.name}">
+                        <div class="price-badge">Rs. ${item.price}</div>
+                    </div>
+                    <div class="card-body">
+                        <h3>${item.name}</h3>
+                        <p>${item.desc}</p>
+                        <button class="btn-card" onclick="addToCart(${item.id})">
+                            <i class="fa-solid fa-plus"></i> Add to Order
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Re-bind scroll reveal for newly injected DOM elements
+            initScrollObserver();
+        }
+
+        function filterCategory(cat, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            if(cat === 'all') renderMenu(rfcFullCatalog);
+            else renderMenu(rfcFullCatalog.filter(i => i.category === cat));
+        }
+
+        function addToCart(id) {
+            const item = rfcFullCatalog.find(i => i.id === id);
+            cart.push(item);
+            updateCartUI();
+            toggleCart(true);
+        }
+
+        function updateCartUI() {
+            document.getElementById('cartCount').innerText = cart.length;
+            const list = document.getElementById('cartItemsList');
+
+            if(cart.length === 0) {
+                list.innerHTML = `<p style="text-align: center; margin-top: 40px; color: var(--text-muted);">Your basket is currently empty.</p>`;
+            } else {
+                list.innerHTML = cart.map(i => `
+                    <div class="cart-item-row">
+                        <span style="font-family: var(--font-head); font-weight: 700; color: var(--text-title); font-size: 0.9rem;">${i.name}</span>
+                        <span style="color: var(--primary); font-weight: 800; font-size: 0.9rem;">Rs. ${i.price}</span>
+                    </div>
+                `).join('');
+            }
+
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('cartTotal').innerText = `Rs. ${total}`;
+        }
+
+        function toggleCart(forceOpen = false) {
+            const drawer = document.getElementById('cartDrawer');
+            if(forceOpen) drawer.classList.add('active');
+            else drawer.classList.toggle('active');
+        }
+
+        function checkoutOrder() {
+            if(cart.length === 0) return alert('Your order basket is currently empty!');
+            window.location.href = 'tel:03014405887';
+        }
+
+        // Scroll Observer for smooth slide-in animations
+        function initScrollObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal-active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+        }
+
+        window.onload = () => {
+            renderMenu(rfcFullCatalog);
+            initScrollObserver();
+        };
+    </script>
+</body>
+</html>
